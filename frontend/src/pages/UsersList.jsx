@@ -24,55 +24,35 @@ export default function UsersList() {
     <div className="users-page">
       <div className="card">
         <h2 className="title">All Users</h2>
-        {loading ? (
-          <p>Loading...</p>
-        ) : (
+        {loading ? <p>Loading...</p> : (
           <div className="users-grid">
-            {/* Custom Users */}
             <div>
               <h3>Custom Users</h3>
-              {data.custom.length === 0 ? (
-                <p className="small-muted">No custom users yet</p>
-              ) : (
+              {data.custom.length === 0 ? <p className="small-muted">No custom users yet</p> : (
                 <div className="list">
-                  {data.custom.map((u) => (
+                  {data.custom.map(u => (
                     <div key={u._id} className="list-item">
-                      <div className="user-row">
-                        <div className="avatar placeholder">{u.name[0]}</div>
-                        <div className="user-info">
-                          <strong>{u.name}</strong>
-                          <div className="small-muted">{u.email}</div>
-                        </div>
+                      <div className="user-info">
+                        <strong>{u.name}</strong>
+                        <div className="small-muted">{u.email}</div>
                       </div>
-                      <div className="small-muted">
-                        {new Date(u.createdAt).toLocaleDateString()}
-                      </div>
+                      <div className="small-muted">{new Date(u.createdAt).toLocaleDateString()}</div>
                     </div>
                   ))}
                 </div>
               )}
             </div>
-
-            {/* Auth0 Users */}
             <div>
               <h3>Auth0 Users</h3>
-              {data.auth0.length === 0 ? (
-                <p className="small-muted">No Auth0 users yet</p>
-              ) : (
+              {data.auth0.length === 0 ? <p className="small-muted">No Auth0 users yet</p> : (
                 <div className="list">
-                  {data.auth0.map((u) => (
-                    <div key={u._id} className="list-item">
-                      <div className="user-row">
-                        {u.picture ? (
-                          <img src={u.picture} alt="avatar" className="avatar" />
-                        ) : (
-                          <div className="avatar placeholder">{u.name[0]}</div>
-                        )}
-                        <div className="user-info">
-                          <strong>{u.name}</strong>
-                          <div className="small-muted">{u.email}</div>
-                          <div className="small-muted">Sub: {u.sub}</div>
-                        </div>
+                  {data.auth0.map(u => (
+                    <div key={u._id} className="list-item auth">
+                      {u.picture && <img src={u.picture} alt="avatar" />}
+                      <div className="user-info">
+                        <strong>{u.name}</strong>
+                        <div className="small-muted">{u.email}</div>
+                        <div className="small-muted">Sub: {u.sub}</div>
                       </div>
                     </div>
                   ))}
