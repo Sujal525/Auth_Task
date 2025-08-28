@@ -53,10 +53,10 @@ export default function Dashboard() {
        <div className="content">
           <h3 className="subtitle">Why Authentication Matters</h3>
           <ul className="points">
-            <li>🔒 Protects sensitive data and user privacy.</li>
-            <li>✅ Verifies user identity before granting access.</li>
-            <li>🌐 Enables secure login across multiple platforms (Auth0 + manual).</li>
-            <li>🛡️ Prevents unauthorized access and data breaches.</li>
+            <li>🔒 Protects sensitive data and user privacy.</li><br></br>
+            <li>✅ Verifies user identity before granting access.</li><br></br>
+            <li>🌐 Enables secure login across multiple platforms (Auth0 + manual).</li><br></br>
+            <li>🛡️ Prevents unauthorized access and data breaches.</li><br></br>
             <li>📊 Tracks user activity securely in MongoDB Atlas.</li>
           </ul>
         </div>
