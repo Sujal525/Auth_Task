@@ -1,59 +1,84 @@
+import { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import CustomLogoutButton from "../components/CustomLogoutButton";
 
 export default function Dashboard() {
-  const { isAuthenticated, user } = useAuth0();
-  const token = localStorage.getItem("bt_token");
-  const manualUser = JSON.parse(localStorage.getItem("bt_user") || "null");
+  const { isAuthenticated, user, logout } = useAuth0();
+  const [manualUser, setManualUser] = useState(null);
+
+  // Load manual user safely from localStorage
+  useEffect(() => {
+    const storedUser = localStorage.getItem("bt_user");
+    if (storedUser) {
+      try {
+        setManualUser(JSON.parse(storedUser));
+      } catch (err) {
+        console.error("Failed to parse manual user:", err);
+      }
+    }
+  }, []);
+
+  // Determine which user is active
+  const displayName = isAuthenticated
+    ? user?.name
+    : manualUser?.name;
+
+  const isManual = !isAuthenticated && manualUser;
 
   return (
-    <div className="dashboard">
-      <div className="card">
-        <div className="dashboard-hero">
-          <div>
-            <h2 className="title">Welcome back to <span className="accent">BanasTech</span> 👋</h2>
-            <p className="small-muted">Nice to see you. This dashboard shows authentication status and users overview.</p>
-          </div>
-          <div className="hero-stats">
-            <div className="stat">
-              <div className="stat-value">Auth</div>
-              <div className="stat-label">Secure</div>
-            </div>
-            <div className="stat">
-              <div className="stat-value">Users</div>
-              <div className="stat-label">Manage</div>
-            </div>
-          </div>
-        </div>
+    <div
+      className="dashboard"
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "80vh",
+        textAlign: "center",
+        flexDirection: "column",
+      }}
+    >
+      {displayName ? (
+        <h1 style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>
+          Welcome, <span className="accent">{displayName}</span> 👋
+        </h1>
+      ) : (
+        <h1 style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>
+          Welcome to <span className="accent">BanasTech</span> 👋
+        </h1>
+      )}
 
-        <div className="grid">
-          <div className="status-card">
-            <h3>Manual Authentication</h3>
-            {token ? (
-              <>
-                <p className="success">✔ Logged in with manual credentials</p>
-                {manualUser && <div className="small-muted">Hello, <strong>{manualUser.name}</strong></div>}
-              </>
-            ) : (
-              <p className="error">✖ Not logged in</p>
-            )}
-          </div>
+      <p style={{ marginTop: "0.5rem", color: "#666" }}>
+        Nice to see you. Your dashboard is ready.
+      </p>
 
-          <div className="status-card">
-            <h3>Google (Auth0)</h3>
-            {isAuthenticated ? (
-              <div className="user-box">
-                {user?.picture && <img src={user.picture} alt="avatar" />}
-                <div>
-                  <strong>{user.name}</strong>
-                  <p className="small-muted">{user.email}</p>
-                </div>
-              </div>
-            ) : (
-              <p className="error">✖ Not logged in</p>
-            )}
-          </div>
-        </div>
-      </div>
+      {/* Show logout depending on login type */}
+      {isAuthenticated && (
+        <button
+          onClick={() => logout({ returnTo: window.location.origin })}
+          style={{
+            marginTop: "1.5rem",
+            padding: "0.6rem 1.2rem",
+            backgroundColor: "#1d3557",
+            color: "#fff",
+            border: "none",
+            borderRadius: "8px",
+            fontSize: "1rem",
+            fontWeight: "500",
+            cursor: "pointer",
+            transition: "background 0.2s ease",
+          }}
+          onMouseOver={(e) =>
+            (e.currentTarget.style.backgroundColor = "#0b2545")
+          }
+          onMouseOut={(e) =>
+            (e.currentTarget.style.backgroundColor = "#1d3557")
+          }
+        >
+          🔒 Logout
+        </button>
+      )}
+
+      {isManual && <CustomLogoutButton />}
     </div>
   );
 }
