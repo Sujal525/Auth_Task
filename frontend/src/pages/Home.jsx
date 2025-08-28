@@ -13,16 +13,16 @@ export default function Home() {
           grid-template-columns: 1fr !important;
           padding: 2rem !important;
         }
-        .hero-right {
-          grid-template-columns: 1fr !important;
-        }
         .title {
           font-size: 2rem !important;
         }
+        .hero-right {
+          grid-template-columns: 1fr 1fr !important; /* keep 2 cols */
+        }
       }
-      @media (max-width: 600px) {
-        .hero-card {
-          padding: 1.5rem !important;
+      @media (max-width: 500px) {
+        .hero-right {
+          grid-template-columns: 1fr !important; /* finally collapse only for very small screens */
         }
         .title {
           font-size: 1.6rem !important;
