@@ -18,67 +18,54 @@ export default function Dashboard() {
     }
   }, []);
 
-  // Determine which user is active
-  const displayName = isAuthenticated
-    ? user?.name
-    : manualUser?.name;
-
+  const displayName = isAuthenticated ? user?.name : manualUser?.name;
   const isManual = !isAuthenticated && manualUser;
 
   return (
-    <div
-      className="dashboard"
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "80vh",
-        textAlign: "center",
-        flexDirection: "column",
-      }}
-    >
-      {displayName ? (
-        <h1 style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>
-          Welcome, <span className="accent">{displayName}</span> 👋
+    <div className="container">
+      <div className="card" style={{ textAlign: "center" }}>
+        <h1 style={{ fontSize: "2rem", marginBottom: "1rem" }}>
+          {displayName ? (
+            <>
+              Welcome, <span className="accent">{displayName}</span> 👋
+            </>
+          ) : (
+            <>
+              Welcome to <span className="accent">BanasTech</span> 👋
+            </>
+          )}
         </h1>
-      ) : (
-        <h1 style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>
-          Welcome to <span className="accent">BanasTech</span> 👋
-        </h1>
-      )}
 
-      <p style={{ marginTop: "0.5rem", color: "#666" }}>
-        Nice to see you. Your dashboard is ready.
-      </p>
+        <p className="small-muted" style={{ marginBottom: "1.5rem" }}>
+          We're glad to have you here. Explore your secure dashboard and manage
+          authentication seamlessly.
+        </p>
 
-      {/* Show logout depending on login type */}
-      {isAuthenticated && (
-        <button
-          onClick={() => logout({ returnTo: window.location.origin })}
-          style={{
-            marginTop: "1.5rem",
-            padding: "0.6rem 1.2rem",
-            backgroundColor: "#1d3557",
-            color: "#fff",
-            border: "none",
-            borderRadius: "8px",
-            fontSize: "1rem",
-            fontWeight: "500",
-            cursor: "pointer",
-            transition: "background 0.2s ease",
-          }}
-          onMouseOver={(e) =>
-            (e.currentTarget.style.backgroundColor = "#0b2545")
-          }
-          onMouseOut={(e) =>
-            (e.currentTarget.style.backgroundColor = "#1d3557")
-          }
-        >
-          🔒 Logout
-        </button>
-      )}
+        {/* Appreciation Card */}
+        <div className="status-card" style={{ marginBottom: "1.5rem" }}>
+          <h3 style={{ marginBottom: "0.5rem" }}>
+            🚀 BanasTech Internship Motto
+          </h3>
+          <p className="small-muted">
+            At <span className="accent">BanasTech</span>, innovation meets
+            opportunity. This internship program is not just about coding but
+            about building real-world, production-ready applications. We
+            appreciate your dedication and effort in contributing to modern
+            authentication solutions.
+          </p>
+        </div>
 
-      {isManual && <CustomLogoutButton />}
+        {/* Logout */}
+        {isAuthenticated && (
+          <button
+            onClick={() => logout({ returnTo: window.location.origin })}
+            className="btn-primary"
+          >
+            🔒 Logout
+          </button>
+        )}
+        {isManual && <CustomLogoutButton />}
+      </div>
     </div>
   );
 }
