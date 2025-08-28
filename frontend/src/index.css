@@ -330,36 +330,3 @@ input:focus, textarea:focus, select:focus {
 .hide-mobile { display: inline-block; }
 @media (max-width:720px) { .hide-mobile { display:none; } }
 
-/* User row layout */
-.user-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-/* Avatar styles */
-.avatar {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  object-fit: cover;
-  flex-shrink: 0;
-  background: var(--accent-200);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  color: var(--accent-700);
-}
-.avatar.placeholder {
-  font-size: 16px;
-}
-
-/* Hover lift for list items */
-.list-item {
-  transition: transform 0.15s var(--ease), box-shadow 0.15s var(--ease);
-}
-.list-item:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-soft);
-}
