@@ -1,7 +1,39 @@
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function Home() {
   const navigate = useNavigate();
+
+  // Apply responsive styles dynamically
+  useEffect(() => {
+    const style = document.createElement("style");
+    style.innerHTML = `
+      @media (max-width: 900px) {
+        .hero-card {
+          grid-template-columns: 1fr !important;
+          padding: 2rem !important;
+        }
+        .hero-right {
+          grid-template-columns: 1fr !important;
+        }
+        .title {
+          font-size: 2rem !important;
+        }
+      }
+      @media (max-width: 600px) {
+        .hero-card {
+          padding: 1.5rem !important;
+        }
+        .title {
+          font-size: 1.6rem !important;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
 
   return (
     <div
@@ -28,6 +60,7 @@ export default function Home() {
           maxWidth: "1100px",
           width: "100%",
           alignItems: "center",
+          transition: "all 0.3s ease",
         }}
       >
         {/* Left Section */}
@@ -55,8 +88,9 @@ export default function Home() {
               maxWidth: "90%",
             }}
           >
-            Seamlessly switch between manual authentication and Google Auth0 login.
-            Store users securely in MongoDB Atlas with production-ready practices.
+            Seamlessly switch between manual authentication and Google Auth0
+            login. Store users securely in MongoDB Atlas with production-ready
+            practices.
           </p>
 
           <button
