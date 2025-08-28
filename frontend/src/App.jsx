@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { Routes, Route, Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
 import SignupForm from "./components/SignupForm";
 import LoginForm from "./components/LoginForm";
@@ -17,6 +19,15 @@ export default function App() {
     window.addEventListener("storage", onStorage);
     return () => window.removeEventListener("storage", onStorage);
   }, []);
+
+    const { isAuthenticated } = useAuth0();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+      if (isAuthenticated) {
+       navigate("/dashboard", { replace: true });
+      }
+    }, [isAuthenticated, navigate]);
 
   const toggleMobile = () => setMobileOpen((s) => !s);
 

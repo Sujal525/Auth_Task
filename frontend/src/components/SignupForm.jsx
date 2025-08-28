@@ -16,7 +16,7 @@ export default function SignupForm() {
     try {
       const res = await axios.post(`${API}/api/auth/signup`, form);
       setMsg({ type: "success", text: res.data.message || "Registered successfully!" });
-      setTimeout(() => navigate("/dashboard"), 900);
+      setTimeout(() => navigate("/login"), 900);
     } catch (err) {
       setMsg({ type: "error", text: err.response?.data?.message || "Signup failed" });
     }
