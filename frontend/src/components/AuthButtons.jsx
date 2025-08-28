@@ -41,13 +41,7 @@ export default function AuthButtons() {
         <div className="auth-logged">
           <span className="user-name">{user?.name || user?.email}</span>
           <button
-            onClick={() =>
-  logout({
-    returnTo: window.location.origin.includes("localhost")
-      ? "http://localhost:5173"
-      : "https://auth-task-lime.vercel.app/"
-  })
-}
+            onClick={() => logout({ returnTo: "https://auth-task-lime.vercel.app/" })}
             className="btn-danger small"
           >
             Logout
