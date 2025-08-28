@@ -50,7 +50,16 @@ export default function Dashboard() {
       <p style={{ marginTop: "0.5rem", color: "#666" }}>
         Nice to see you. Your dashboard is ready.
       </p>
-
+       <div className="content">
+          <h3 className="subtitle">Why Authentication Matters</h3>
+          <ul className="points">
+            <li>🔒 Protects sensitive data and user privacy.</li>
+            <li>✅ Verifies user identity before granting access.</li>
+            <li>🌐 Enables secure login across multiple platforms (Auth0 + manual).</li>
+            <li>🛡️ Prevents unauthorized access and data breaches.</li>
+            <li>📊 Tracks user activity securely in MongoDB Atlas.</li>
+          </ul>
+        </div>
       {/* Show logout depending on login type */}
       {isAuthenticated && (
         <button

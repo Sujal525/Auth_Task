@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 export default function Home() {
+  const navigate = useNavigate();
+
   return (
     <div
       className="home"
@@ -74,6 +78,7 @@ export default function Home() {
             onMouseOut={(e) =>
               (e.currentTarget.style.background = "#007bff")
             }
+            onClick={() => navigate("/signup")}
           >
             Get Started 🚀
           </button>
