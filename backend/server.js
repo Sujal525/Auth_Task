@@ -10,21 +10,12 @@ import usersRoutes from "./routes/usersRoutes.js";
 dotenv.config();
 const app = express();
 
-// CORS: allow local + prod from env
-const allowedOrigins = [
-  process.env.FRONTEND_LOCAL,
-  process.env.FRONTEND_PROD,
-].filter(Boolean);
-
+// ⚡ Allow all CORS
 app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin) return callback(null, true); // allow curl/postman
-    if (allowedOrigins.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("CORS not allowed"), false);
-    }
-  },
+  origin: "*",          // allow all origins
+  methods: ["GET","POST","PUT","DELETE","OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true      // if you need cookies/auth headers
 }));
 
 app.use(bodyParser.json());
