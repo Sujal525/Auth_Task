@@ -28,9 +28,34 @@ export default function SignupForm() {
         <h2 className="title">Create an account — BanasTech</h2>
         <p className="small-muted">Signup with email & password, or use Google login in the header.</p>
         <form onSubmit={handleSubmit}>
-          <input name="name" placeholder="Full name" value={form.name} onChange={handleChange} required />
-          <input name="email" type="email" placeholder="Email address" value={form.email} onChange={handleChange} required />
-          <input name="password" type="password" placeholder="Password" value={form.password} onChange={handleChange} required />
+          <input 
+            name="name" 
+            placeholder="Full name" 
+            value={form.name} 
+            onChange={handleChange} 
+            required 
+          />
+          <input 
+            name="email" 
+            type="email" 
+            placeholder="Email address" 
+            value={form.email} 
+            onChange={handleChange} 
+            required 
+          />
+          <input 
+            name="password" 
+            type="password" 
+            placeholder="Password" 
+            value={form.password} 
+            onChange={handleChange} 
+            required 
+          />
+          {/* Password rule sentence */}
+          <p className="small-muted">
+            Password must be at least 8 characters long and include one uppercase letter, one lowercase letter, one number, and one special character.
+          </p>
+          
           <button className="btn-primary" type="submit">Sign up</button>
         </form>
         {msg && <div className={`msg ${msg.type}`}>{msg.text}</div>}
